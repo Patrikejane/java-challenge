@@ -1,5 +1,6 @@
 package jp.co.axa.apidemo.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +22,7 @@ import javax.persistence.Table;
 @Table(name="EMPLOYEE")
 @Getter
 @Setter
+@AllArgsConstructor
 public class Employee {
 
     @Id
