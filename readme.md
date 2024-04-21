@@ -70,7 +70,7 @@ further  improvements:
 in order to mitigate vulnerabilities of previous Versions
 
 - User Authentication: 
-Implement user authentication/authorization using oAuth2/OpenIDconnet to secure the API endpoints.
+Implement api level authorizaqtion an user authentication using oAuth2/OpenIDconnet to secure the API endpoints.
 
 - Containerizing
 In order to modularize the Employee Service for make it suit for Microservice Architecture
