@@ -12,6 +12,7 @@ import jp.co.axa.apidemo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -94,6 +95,7 @@ public class EmployeeController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @DeleteMapping("/{employeeId}")
+    @Secured("ROLE_ADMIN")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteEmployee(@PathVariable Long employeeId) {
         employeeService.deleteEmployee(employeeId);
@@ -113,6 +115,7 @@ public class EmployeeController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @PutMapping("/{employeeId}")
+    @Secured("ROLE_ADMIN")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<Void> updateEmployee(@RequestBody Employee employee, @PathVariable Long employeeId) {
         employeeService.updateEmployee(employeeId, employee);

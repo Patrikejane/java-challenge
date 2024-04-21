@@ -22,7 +22,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
-
     @ExceptionHandler(EmployeeEntityNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleEmployeeEntityNotFoundException(EmployeeEntityNotFoundException ex) {
         ErrorResponse errorResponse = new ErrorResponse(

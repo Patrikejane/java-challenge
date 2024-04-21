@@ -5,6 +5,8 @@ import jp.co.axa.apidemo.exception.EmployeeEntityNotFoundException;
 import jp.co.axa.apidemo.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 
 import javax.persistence.*;
 import java.util.List;
@@ -35,6 +37,8 @@ public class EmployeeServiceImpl implements EmployeeService{
      *
      * @return a list of all employees
      */
+    @Override
+    @Cacheable(value = "employees")
     public List<Employee> retrieveEmployees() {
         return employeeRepository.findAll();
     }
@@ -45,6 +49,9 @@ public class EmployeeServiceImpl implements EmployeeService{
      * @param employeeId the ID of the employee to retrieve
      * @return an Optional containing the employee if found, otherwise empty
      */
+
+    @Override
+    @Cacheable(value = "employees", key = "#employeeId")
     public Employee getEmployee(Long employeeId) {
         Employee employee = employeeRepository
                 .findById(employeeId).orElseThrow(
@@ -67,6 +74,8 @@ public class EmployeeServiceImpl implements EmployeeService{
      *
      * @param employeeId the ID of the employee to delete
      */
+    @Override
+    @CacheEvict(value = "employees", key = "#employeeId")
     public void deleteEmployee(Long employeeId) {
         if (employeeRepository.existsById(employeeId)) {
             employeeRepository.deleteById(employeeId);
@@ -79,8 +88,10 @@ public class EmployeeServiceImpl implements EmployeeService{
      * Updates an existing employee.
      *
      * @param employeeId the ID of the employee to update
-     * @param employee   the updated employee object
+     * @param employee the updated employee object
      */
+    @Override
+    @CacheEvict(value = "employees", key = "#employeeId")
     public void updateEmployee(Long employeeId, Employee employee) {
         if (employeeRepository.existsById(employeeId)) {
             employee.setId(employeeId);
