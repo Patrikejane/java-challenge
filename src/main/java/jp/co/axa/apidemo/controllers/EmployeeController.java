@@ -59,7 +59,7 @@ public class EmployeeController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @GetMapping("/{employeeId}")
-    public ResponseEntity<Employee> getEmployee(@PathVariable Long employeeId) {
+     public ResponseEntity<Employee> getEmployee(@PathVariable Long employeeId) {
         Employee employee = employeeService.getEmployee(employeeId);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
