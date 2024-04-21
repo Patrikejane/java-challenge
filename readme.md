@@ -50,3 +50,56 @@ Please let us know more about your Java experience in a few sentences. For examp
 - I have 3 years experience in Java and I started to use Spring Boot from last year
 - I'm a beginner and just recently learned Spring Boot
 - I know Spring Boot very well and have been using it for many years
+
+################################################################################################
+
+#### what you did:
+- update the Spring Boot version in order to mitigate direct vulnerabilities
+- Add role base security layer 
+- Implement caching with Spring Cache
+- Added ControllerAdvisor to centralize exception handling for reporting validation errors
+- added loggers for meaning full logging purpose 
+- Refactor Code Format and annotations
+- Added tests (controller test)
+- added environment profiles to separate between dev test prod.
+
+#### what you would have done
+further  improvements:
+
+- Sprig 3 and Java latest:
+in order to mitigate vulnerabilities of previous Versions
+
+- User Authentication: 
+Implement user authentication/authorization using oAuth2/OpenIDconnet to secure the API endpoints.
+
+- Containerizing
+In order to modularize the Employee Service for make it suit for Microservice Architecture
+enabling easier development, deployment, and scaling
+
+- Pagination: 
+Introduce pagination support for better Data handling through Apis and to improve performance. 
+
+- Database Integration: 
+integration with a Sequel/Document database according to the requirement for the data persistence.
+
+- Exception Handling: 
+further Enhance exception handling to provide meaningful error messages and responses.
+
+- Testing: 
+Improve unit tests and Integration Tests code coverage.
+
+- Documentation: 
+improve code comments and API documentation for better developer experience.
+
+- Frontend:
+Develop a frontend using React or angular and integration  for managing employees.
+
+- caching:
+Introduce in-memory data store cache service like Redis for the  improvement of performance scalability
+
+- Configuration:
+Introduce Configuration server in order to manage distributed Configuration
+
+
+My experience in Java
+I have over all 5+ years experience in Java.

@@ -16,12 +16,15 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/v1/employees")
 
 public class EmployeeController {
 
+
+    private static final Logger logger = Logger.getLogger(EmployeeController.class.getName());
 
     private final EmployeeService employeeService;
 
@@ -43,6 +46,7 @@ public class EmployeeController {
     })
     @GetMapping("/")
     public ResponseEntity<List<Employee>> getEmployees() {
+        logger.info("Received request to get all employees");
         List<Employee> employees = employeeService.retrieveEmployees();
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
@@ -61,6 +65,7 @@ public class EmployeeController {
     })
     @GetMapping("/{employeeId}")
      public ResponseEntity<Employee> getEmployee(@PathVariable Long employeeId) {
+        logger.info("get employee by ID"+ employeeId);
         Employee employee = employeeService.getEmployee(employeeId);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
@@ -79,6 +84,7 @@ public class EmployeeController {
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> saveEmployee(@RequestBody Employee employee) {
+        logger.info("Create employee ");
         employeeService.saveEmployee(employee);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -98,6 +104,7 @@ public class EmployeeController {
     @Secured("ROLE_ADMIN")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteEmployee(@PathVariable Long employeeId) {
+        logger.info("Delete employee by ID"+ employeeId);
         employeeService.deleteEmployee(employeeId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -114,10 +121,12 @@ public class EmployeeController {
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
+
     @PutMapping("/{employeeId}")
     @Secured("ROLE_ADMIN")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<Void> updateEmployee(@RequestBody Employee employee, @PathVariable Long employeeId) {
+        logger.info("Update employee by ID"+ employeeId);
         employeeService.updateEmployee(employeeId, employee);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }

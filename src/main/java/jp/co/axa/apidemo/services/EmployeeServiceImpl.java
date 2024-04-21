@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Service implementation for managing employees.
@@ -19,6 +20,8 @@ import java.util.List;
  */
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
+
+    private static final Logger logger = Logger.getLogger(EmployeeServiceImpl.class.getName());
 
     private final EmployeeRepository employeeRepository;
 
@@ -40,6 +43,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     @Cacheable(value = "employees")
     public List<Employee> retrieveEmployees() {
+        logger.info("Retrieving all employees");
         return employeeRepository.findAll();
     }
 
@@ -53,6 +57,8 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     @Cacheable(value = "employees", key = "#employeeId")
     public Employee getEmployee(Long employeeId) {
+        logger.info("get employee by ID"+ employeeId);
+
         Employee employee = employeeRepository
                 .findById(employeeId).orElseThrow(
                         () -> new EmployeeEntityNotFoundException("Employee not found",
@@ -77,6 +83,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     @CacheEvict(value = "employees", key = "#employeeId")
     public void deleteEmployee(Long employeeId) {
+        logger.info("delete employee by ID " + employeeId);
         if (employeeRepository.existsById(employeeId)) {
             employeeRepository.deleteById(employeeId);
         } else{
@@ -93,6 +100,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     @CacheEvict(value = "employees", key = "#employeeId")
     public void updateEmployee(Long employeeId, Employee employee) {
+        logger.info("delete employee by ID " + employeeId);
         if (employeeRepository.existsById(employeeId)) {
             employee.setId(employeeId);
             employeeRepository.save(employee);

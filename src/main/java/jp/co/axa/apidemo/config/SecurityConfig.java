@@ -11,16 +11,23 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * Configuration class for security settings.
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * Configures HTTP security.
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/api/v1/employees/**").authenticated() // Protect all endpoints under /api/v1/employees
-                .anyRequest().permitAll() // Allow all other requests
+                .antMatchers("/api/v1/employees/**").authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .httpBasic();
     }
